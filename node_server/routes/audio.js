@@ -44,6 +44,7 @@
      
      try {
          const reader = Attachment.read({_id: ObjectID(req.params.trackID)});   
+
          reader.on('data', (chunk)=> {
              res.write(chunk);
          });

@@ -43,14 +43,10 @@ app.use(function(err, req, res, next) {
 });
 
 // app.listen()의 의미 : https://whatsmyinterest.tistory.com/25
-app.listen(3005, () => {
-  console.log("App listening on port 3005!");
-});
 
 app.listen(3000, () => {
   console.log("App listening on port 3000!");
 });
-
 app.listen(8080, () => {
   console.log("App listening on port 8080!");
 });
