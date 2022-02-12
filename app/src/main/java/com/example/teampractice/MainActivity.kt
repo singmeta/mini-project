@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mWebView!!.webViewClient = WebViewClient()
         mWebSettings = mWebView!!.settings
         mWebSettings!!.javaScriptEnabled = true
-        mWebView!!.loadUrl("웹뷰에 띄울 URL입력")
+        mWebView!!.loadUrl("10.0.2.2:3000")
     }
 
 
@@ -74,6 +74,74 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         } else {
                             Log.v(TAG, "error = " + response.code().toString())
                             Toast.makeText(applicationContext, "error = " + response.code().toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Log.v(TAG, "Fail")
+                        Toast.makeText(applicationContext, "Response Fail", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                })
+            }
+
+            R.id.btn_post -> {
+                val call_post : Call<ResponseBody> = service.postFunc("post data")
+                call_post.enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        if (response.isSuccessful) {
+                            try {
+                                val result = response.body()!!.string()
+                                Log.v(TAG, "result = $result")
+                                Toast.makeText(applicationContext, result, Toast.LENGTH_SHORT)
+                                    .show()
+                            } catch (e: IOException) {
+                                e.printStackTrace()
+                            }
+                        } else {
+                            Log.v(TAG, "error = " + response.code().toString())
+                            Toast.makeText(
+                                applicationContext,
+                                "error = " + response.code().toString(),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Log.v(TAG, "Fail")
+                        Toast.makeText(applicationContext, "Response Fail", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                })
+            }
+
+            R.id.btn_delete -> {
+                val call_delete : Call<ResponseBody> = service.deleteFunc("board")
+                call_delete.enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        if (response.isSuccessful) {
+                            try {
+                                val result = response.body()!!.string()
+                                Log.v(TAG, "result = $result")
+                                Toast.makeText(applicationContext, result, Toast.LENGTH_SHORT)
+                                    .show()
+                            } catch (e: IOException) {
+                                e.printStackTrace()
+                            }
+                        } else {
+                            Log.v(TAG, "error = " + response.code().toString())
+                            Toast.makeText(
+                                applicationContext,
+                                "error = " + response.code().toString(),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 
