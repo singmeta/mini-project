@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val call_get : Call<ResponseBody> = service.getFunc("get data")
 
                 call_get.enqueue(object : Callback<ResponseBody> {
+                    //응답 성공시
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                         if (response.isSuccessful) {
                             try {
@@ -77,6 +78,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         }
                     }
 
+                    //응답 실패시
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                         Log.v(TAG, "Fail")
                         Toast.makeText(applicationContext, "Response Fail", Toast.LENGTH_SHORT)

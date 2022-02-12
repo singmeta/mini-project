@@ -7,14 +7,16 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @GET("/audio/:trackID")
-    fun getFunc(@Query("/:trackID") data: String): Call<ResponseBody>
+    //http://localhost:3000/audio/:trackID/?data=""
+
+    @GET("/audio/:trackID") //뒤에 추가되는 url 엔드포인트
+    fun getFunc(@Query("data") data: String): Call<ResponseBody> 
 
     @FormUrlEncoded
     @POST("/audio")
-    fun postFunc(@Field("/") data: String): Call<ResponseBody>
+    fun postFunc(@Field("data") data: String): Call<ResponseBody>
 
     @DELETE("/audio/:trackID")
-    fun deleteFunc(@Path("/:trackID") id: String): Call<ResponseBody>
+    fun deleteFunc(@Path("data") id: String): Call<ResponseBody>
 
 }
